@@ -1,0 +1,52 @@
+---
+# # use space not tab
+# apiVersion: apps/v1 # which api to use for deployment
+# kind: Deployment # pod - service what kind of service/object
+# # what would you like to call it 
+# metadata:
+#   name: nginx-deployment #naming deployment
+# spec:
+#   selector: 
+#     matchLabels:
+#       app: nginx #look for this label to match with k8
+#   replicas: 3
+#   template:
+#     metadata:
+#       labels:
+#         app: nginx
+#     spec: 
+#       containers:
+#       - name: nginx
+#         image: mutioba/app:v2 # use the image we built for nginx
+#         ports:
+#         - containerPort: 80       
+
+
+
+
+apiVersion: apps/v1 # which api to use for deployment
+
+kind: Deployment # what kind of service/object do you want to create?
+
+# what would you like to call it - name the service/object
+
+
+metadata:
+  name: nginx-deployment
+spec:
+  selector: 
+    matchLabels:
+      app: nginx
+  replicas: 3
+
+  template:
+    metadata:
+      labels:
+        app: nginx
+    
+    spec: 
+      containers:
+      - name: nginx
+        image: jakegillatt/sparta-app:jake_app
+        ports:
+        - containerPort: 80

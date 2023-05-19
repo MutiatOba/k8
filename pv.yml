@@ -1,0 +1,21 @@
+apiVersion: autoscaling/v1
+kind: PersistenVolume
+metadata:
+  name: my-pv
+spec:
+  maxReplicas: 9
+  minReplicas:3
+scaleTargetRef: 
+  apiVersion: apps/v1
+  kind: Deployment
+  name: node-deployment
+targetCPUUtilizationPercentage: 50
+
+---
+apiVersion: autoscaling/v1
+kind: PersistenVolumeClaim
+metadata:
+  name: my-pvc
+selector:
+  MatchLabels:
+    app: node

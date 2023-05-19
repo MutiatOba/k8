@@ -1,0 +1,29 @@
+# use space not tab
+apiVersion: apps/v1 # which api to use for deployment
+kind: Deployment # pod - service what kind of service/object
+# what would you like to call it 
+metadata:
+  name: node-deployment #naming deployment
+spec:
+  selector: 
+    matchLabels:
+      app: node #look for this label to match with k8
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: node
+    spec: 
+      containers:
+      - name: node
+        image: mutioba/app:v2 # use the image we built for nginx
+        ports:
+        - containerPort: 80
+        env:
+        - name: DB_HOST
+          value: "mongodb://mongodb-service:27017/posts"     
+      volumes:
+      - name: my-volume
+        persistentVolumeClaim:
+          claimName: my-pvc
+        
